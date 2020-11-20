@@ -93,6 +93,9 @@ title('A square pulse in time and the effect of noise','linewidth',10)
 x_square = zeros(size(t_axis));
 y_square = zeros(size(t_axis));
 %%% WRITE YOUR CODE HERE
+x_bits = 500;
+x_square = GenerateSquarePulses(t_axis,T_sq,Energy_per_bit,fs,x_bits,'unipolar');
+y_square = AWGNChannel(x_square,No,fs);
 
 %%%
 

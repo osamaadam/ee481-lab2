@@ -37,7 +37,8 @@ N = length(t_axis);
 
 %%% Generate one square pulse
 N_sq = round(T_sq/Ts);
-one_square = zeros(1, N);
+periodDuration = round(N / x_bits);
+one_square = zeros(1, periodDuration);
 
 %%% WRITE YOUR CODE HERE
 % Here you should create exactly one square pulse with the specified
@@ -71,7 +72,7 @@ switch type
     case ('unipolar')
         %%% This case is for RZ
         %%% WRITE YOUR CODE HERE
-        x_square = repmat(one_square, x_bits);
+          x_square = repmat(one_square, [1, x_bits])(1: N);
         % YOUR CODE ENDS HERE
 end
 
