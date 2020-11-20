@@ -71,9 +71,11 @@ switch type
     case ('unipolar')
         %%% This case is for RZ
         %%% WRITE YOUR CODE HERE
-        horizontalRepeat = repmat(one_square, 1, x_bits);
+        numOfBits = length(x_bits);
+        horizontalRepeat = repmat(one_square, 1, numOfBits);
         seqLength = length(horizontalRepeat);
-        x_square(1: seqLength) = horizontalRepeat;
+        x_bits = repelem(x_bits, 1, round(seqLength / numOfBits));
+        x_square(1: seqLength) = horizontalRepeat .* x_bits;
         % YOUR CODE ENDS HERE
 end
 

@@ -124,7 +124,7 @@ title('A series of square pulses in time and the effect of noise','linewidth',10
 % implemented the code correctly and to better understand the operation of
 % the matched filter.
 
-x_bits = [1];
+x_bits = [1, 0];
 x_pulse_shaped = GenerateSquarePulses(t_axis,T_sq,Energy_per_bit,fs,x_bits,'unipolar');
 [rec_bits, ht, z_square] = MatchedFilter(T_sq,Energy_per_bit,fs,x_pulse_shaped,'unipolar'); % IMPLEMENT THIS: implement the operation of the matched filter. You don't have to implement the decision part of the matched filter
 
@@ -178,6 +178,14 @@ BER_uni = 0;
 %
 % Hint: reuse the code from the previous cell. Your code can be as short as
 % 5 lines. You can reuse the function ComputeBER from Experiment 1.
+
+x_bits = randi([0, 1], [1, N_bits]);
+
+x_square = GenerateSquarePulses(t_axis, T_sq, Energy_per_bit, fs, x_bits, 'unipolar'); 
+y_square = AWGNChannel(x_square, No, fs);
+[rec_bits, ht, z_square, samples] = MatchedFilter(T_sq, Energy_per_bit, fs, y_square, 'unipolar'); 
+
+BER_uni = sum(bitxor(x_bits, samples)) / length(x_bits);
 
 %%%
 
