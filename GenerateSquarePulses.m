@@ -37,8 +37,7 @@ N = length(t_axis);
 
 %%% Generate one square pulse
 N_sq = round(T_sq/Ts);
-periodDuration = round(N / x_bits);
-one_square = zeros(1, periodDuration);
+one_square = zeros(1, N_sq * 2);
 
 %%% WRITE YOUR CODE HERE
 % Here you should create exactly one square pulse with the specified
@@ -49,9 +48,7 @@ one_square = zeros(1, periodDuration);
 % generate the pulse. Keep in mind that you have to set the energy of the
 % square pulse to be equal to E_bit.
 
-pulseDuration = T_sq * fs;
-
-one_square(1: pulseDuration) = E_bit * ones(1, pulseDuration);
+one_square(1: N_sq) = E_bit * ones(1, N_sq);
 
 % YOUR CODE ENDS HERE
 %%%
@@ -61,6 +58,8 @@ one_square(1: pulseDuration) = E_bit * ones(1, pulseDuration);
 % create the final array x_square. This final array should consist of the
 % square pulses corresponding to each input bit. Note that the dimensions 
 % of the x_square should always be equal to the dimensions of t_axis.
+
+x_square = zeros(1, N);
 
 switch type
     case ('bipolar')
@@ -72,7 +71,9 @@ switch type
     case ('unipolar')
         %%% This case is for RZ
         %%% WRITE YOUR CODE HERE
-          x_square = repmat(one_square, [1, x_bits])(1: N);
+        horizontalRepeat = repmat(one_square, 1, x_bits);
+        seqLength = length(horizontalRepeat);
+        x_square(1: seqLength) = horizontalRepeat;
         % YOUR CODE ENDS HERE
 end
 

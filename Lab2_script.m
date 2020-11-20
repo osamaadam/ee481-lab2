@@ -20,7 +20,7 @@ f_axis = -fs/2:fs/N:fs/2-1/N;   % Frequency axis (the same during the entire exp
 
 % Generate one square pulse with the following parameters
 Energy_per_bit = 1;             % The total energy of all samples constituting the square pulse
-T_sq = 100*Ts;                  % The duration of the square pulse (an integer number of sampling times)
+T_sq = 1e-3;                  % The duration of the square pulse (an integer number of sampling times)
 
 x_bits = 1;
 x_square = GenerateSquarePulses(t_axis,T_sq,Energy_per_bit,fs,x_bits,'unipolar');    % IMPLEMENT THIS: complete the 'RZ' part
@@ -93,8 +93,8 @@ title('A square pulse in time and the effect of noise','linewidth',10)
 x_square = zeros(size(t_axis));
 y_square = zeros(size(t_axis));
 %%% WRITE YOUR CODE HERE
-x_bits = 500;
-x_square = GenerateSquarePulses(t_axis,T_sq,Energy_per_bit,fs,x_bits,'unipolar');
+x_bits = [2];
+x_square = GenerateSquarePulses(t_axis,T_sq,Energy_per_bit,fs,x_bits,'unipolar'); 
 y_square = AWGNChannel(x_square,No,fs);
 
 %%%
