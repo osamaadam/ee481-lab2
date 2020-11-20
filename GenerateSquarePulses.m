@@ -61,8 +61,6 @@ one_square(1: pulseDuration) = E_bit * ones(1, pulseDuration);
 % square pulses corresponding to each input bit. Note that the dimensions 
 % of the x_square should always be equal to the dimensions of t_axis.
 
-x_square = repmat(one_square, x_bits);
-
 switch type
     case ('bipolar')
         %%% This case is for NRZ
@@ -73,7 +71,7 @@ switch type
     case ('unipolar')
         %%% This case is for RZ
         %%% WRITE YOUR CODE HERE
-        
+        x_square = repmat(one_square, x_bits);
         % YOUR CODE ENDS HERE
 end
 

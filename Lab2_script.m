@@ -62,6 +62,7 @@ Eb_No_db = 0;       % The specified Eb/No value in dB
 %%%
 
 %%% Implement the effect of the AWGN channel
+No = 1;
 y_square = AWGNChannel(x_square,No,fs);     % IMPLEMENT THIS: the output of the AWGN channel should be given in y_square.
 
 figure

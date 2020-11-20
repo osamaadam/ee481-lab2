@@ -15,5 +15,6 @@ y = zeros(size(x));
 % input x, corrupted by an AWGN noise with variance No/2. Hint: use randn
 % as a function for generating Gaussian noise with unit variance.
 
+y = x + (No / 2) * randn(size(x));
 
 %%%
