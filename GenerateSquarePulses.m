@@ -48,9 +48,9 @@ one_square = zeros(1, N_sq);
 % generate the pulse. Keep in mind that you have to set the energy of the
 % square pulse to be equal to E_bit.
 
-amp = sqrt( ( 2 * E_bit ) / N_sq  );
 
-one_square(1: N_sq) = amp * ones(1, N_sq);
+
+one_square(1: N_sq) = ones(1, N_sq);
 
 % YOUR CODE ENDS HERE
 %%%
@@ -67,6 +67,10 @@ switch type
     case ('bipolar')
         %%% This case is for NRZ
         %%% WRITE YOUR CODE HERE
+        amp = sqrt( ( E_bit ) / N_sq  );
+        
+        one_square = amp * one_square;
+        
         numOfBits = length(x_bits);
         horizontalRepeat = repmat(one_square, 1, numOfBits);
         seqLength = length(horizontalRepeat);
@@ -78,6 +82,10 @@ switch type
     case ('unipolar')
         %%% This case is for RZ
         %%% WRITE YOUR CODE HERE
+        amp = sqrt( ( 2 * E_bit ) / N_sq  );
+        
+        one_square = amp * one_square;
+        
         numOfBits = length(x_bits);
         horizontalRepeat = repmat(one_square, 1, numOfBits);
         seqLength = length(horizontalRepeat);
