@@ -124,7 +124,7 @@ title('A series of square pulses in time and the effect of noise','linewidth',10
 % implemented the code correctly and to better understand the operation of
 % the matched filter.
 
-x_bits = [1, 0];
+x_bits = [1, 1, 1];
 x_pulse_shaped = GenerateSquarePulses(t_axis,T_sq,Energy_per_bit,fs,x_bits,'unipolar');
 [rec_bits, ht, z_square] = MatchedFilter(T_sq,Energy_per_bit,fs,x_pulse_shaped,'unipolar'); % IMPLEMENT THIS: implement the operation of the matched filter. You don't have to implement the decision part of the matched filter
 
@@ -137,7 +137,7 @@ xlabel('Time','linewidth',2)
 ylabel('Square pulse','linewidth',2)
 
 subplot(3,1,2)
-plot(t_axis,[ht zeros(1,length(x_square) - length(ht))],'linewidth',2)
+plot(t_axis,[ht zeros(1,length(x_pulse_shaped) - length(ht))],'linewidth',2)
 title('Student Figure','linewidth',10)
 grid on
 xlim([0 T_sq*2.2])
@@ -185,7 +185,7 @@ x_square = GenerateSquarePulses(t_axis, T_sq, Energy_per_bit, fs, x_bits, 'unipo
 y_square = AWGNChannel(x_square, No, fs);
 [rec_bits, ht, z_square, samples] = MatchedFilter(T_sq, Energy_per_bit, fs, y_square, 'unipolar'); 
 
-BER_uni = sum(bitxor(x_bits, samples)) / length(x_bits);
+BER_uni = sum(bitxor(x_bits, samples(1: N_bits))) / N_bits;
 
 %%%
 

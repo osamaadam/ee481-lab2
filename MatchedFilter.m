@@ -93,8 +93,8 @@ switch type
         % unipolar encoding which uses z_signal to decide the values of the
         % input bits
         samples = [];
-        for i = N_sq * 2 : N_sq * 2 : length(z_signal)
-          if (z_signal(i) > 0)
+        for i = N_sq : N_sq * 2 : length(z_signal)
+          if (z_signal(i) > 50)
             samples = [samples, 1];
           else
             samples = [samples, 0];
