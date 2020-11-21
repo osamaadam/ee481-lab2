@@ -288,7 +288,7 @@ x_square = GenerateSquarePulses(t_axis, T_sq, Energy_per_bit, fs, x_bits, 'bipol
 y_square = AWGNChannel(x_square, No, fs);
 [rec_bits, ht, z_square, samples] = MatchedFilter(T_sq, Energy_per_bit, fs, y_square, 'bipolar'); 
 
-BER_uni = sum(bitxor(x_bits, samples(1: N_bits))) / N_bits;
+BER_bi = sum(bitxor(x_bits, samples(1: N_bits))) / N_bits;
 
 %%%
 

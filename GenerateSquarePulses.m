@@ -48,7 +48,9 @@ one_square = zeros(1, N_sq);
 % generate the pulse. Keep in mind that you have to set the energy of the
 % square pulse to be equal to E_bit.
 
-one_square(1: N_sq) = E_bit * ones(1, N_sq);
+amp = sqrt( ( 2 * E_bit ) / N_sq  );
+
+one_square(1: N_sq) = amp * ones(1, N_sq);
 
 % YOUR CODE ENDS HERE
 %%%
