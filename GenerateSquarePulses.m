@@ -37,7 +37,7 @@ N = length(t_axis);
 
 %%% Generate one square pulse
 N_sq = round(T_sq/Ts);
-one_square = zeros(1, N_sq * 2);
+one_square = zeros(1, N_sq);
 
 %%% WRITE YOUR CODE HERE
 % Here you should create exactly one square pulse with the specified
@@ -65,7 +65,12 @@ switch type
     case ('bipolar')
         %%% This case is for NRZ
         %%% WRITE YOUR CODE HERE
-
+        numOfBits = length(x_bits);
+        horizontalRepeat = repmat(one_square, 1, numOfBits);
+        seqLength = length(horizontalRepeat);
+        x_bits = (x_bits .* 2) - 1;
+        x_bits = repelem(x_bits, 1, round(seqLength / numOfBits));
+        x_square(1: seqLength) = horizontalRepeat .* x_bits;
         % YOUR CODE ENDS HERE
         
     case ('unipolar')

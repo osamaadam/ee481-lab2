@@ -66,12 +66,26 @@ switch type
         %%% WRITE YOUR CODE HERE
         % Compute the MF impulse response ht, and the MF output signal
         % z_signal for the bipolar encoding case
+        
+        x_bits = [1];
+        ht = GenerateSquarePulses(N_bits, T_sq, E_bit, fs, x_bits, 'unipolar');
+        rec_bits = y_signal;
+        z_signal = conv2(rec_bits, ht);
   
         %%%
         
         %%% WRITE YOUR CODE HERE
         % Implement the decision part of the receiver with bipolar encoding
         % which uses z_signal to decide the values of the input bits
+        
+        samples = [];
+        for i = N_sq : N_sq : length(z_signal)
+          if (z_signal(i) > 0)
+            samples = [samples, 1];
+          else
+            samples = [samples, 0];
+          end
+        end
  
         %%%
         
@@ -93,7 +107,7 @@ switch type
         % unipolar encoding which uses z_signal to decide the values of the
         % input bits
         samples = [];
-        for i = N_sq : N_sq * 2 : length(z_signal)
+        for i = N_sq : N_sq : length(z_signal)
           if (z_signal(i) > 50)
             samples = [samples, 1];
           else
