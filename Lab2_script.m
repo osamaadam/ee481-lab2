@@ -53,12 +53,12 @@ title('A square pulse in time and frequency domains','linewidth',10)
 
 % See the effect of an AWGN channel for a particular Eb/No value
 Eb_No_db = 0;       % The specified Eb/No value in dB
-No = calculateNo(Eb_No_db, Energy_per_bit);
 
 %%% WRITE YOUR CODE HERE
 % Knowing the value of Eb/No in dB, and for the given energy per bit value
 % specified above, find the corresponding value of No.
 
+No = calculateNo(Eb_No_db, Energy_per_bit);
 
 %%%
 
@@ -94,7 +94,7 @@ title('A square pulse in time and the effect of noise','linewidth',10)
 x_square = zeros(size(t_axis));
 y_square = zeros(size(t_axis));
 %%% WRITE YOUR CODE HERE
-x_bits = [2];
+x_bits = [1, 0, 1, 0];
 x_square = GenerateSquarePulses(t_axis,T_sq,Energy_per_bit,fs,x_bits,'unipolar'); 
 y_square = AWGNChannel(x_square,No,fs);
 
