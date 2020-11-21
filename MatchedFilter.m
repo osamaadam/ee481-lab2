@@ -67,7 +67,7 @@ switch type
         % Compute the MF impulse response ht, and the MF output signal
         % z_signal for the bipolar encoding case
         
-        ht = GenerateSquarePulses(N_bits, T_sq, E_bit, fs, [1], 'unipolar');
+        ht = GenerateSquarePulses(N_bits, T_sq, E_bit, fs, [1], 'bipolar');
         rec_bits = y_signal;
         z_signal = conv2(rec_bits, ht);
   
