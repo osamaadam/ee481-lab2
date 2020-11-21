@@ -314,13 +314,13 @@ x_bits = randi([0, 1], [1, N_bits]);
 for i = 1 : length(Eb_No_dB_vector)
   No = calculateNo(Eb_No_dB_vector(i), Energy_per_bit);
   x_square = GenerateSquarePulses(t_axis, T_sq, Energy_per_bit, fs, x_bits, 'unipolar'); 
-  y_square = AWGNChannel(x_square, Eb_No_dB_vector(i), fs);
+  y_square = AWGNChannel(x_square, No, fs);
   [rec_bits, ht, z_square, samples] = MatchedFilter(T_sq, Energy_per_bit, fs, y_square, 'unipolar'); 
   
   BER_uni(i) = sum(bitxor(x_bits, samples(1: N_bits))) / N_bits;
   
   x_square = GenerateSquarePulses(t_axis, T_sq, Energy_per_bit, fs, x_bits, 'bipolar'); 
-  y_square = AWGNChannel(x_square, Eb_No_dB_vector(i), fs);
+  y_square = AWGNChannel(x_square, No, fs);
   [rec_bits, ht, z_square, samples] = MatchedFilter(T_sq, Energy_per_bit, fs, y_square, 'bipolar'); 
   
   BER_bi(i) = sum(bitxor(x_bits, samples(1: N_bits))) / N_bits;
