@@ -62,7 +62,7 @@ Eb_No_db = 0;       % The specified Eb/No value in dB
 %%%
 
 %%% Implement the effect of the AWGN channel
-No = 1;
+No = 2;
 y_square = AWGNChannel(x_square,No,fs);     % IMPLEMENT THIS: the output of the AWGN channel should be given in y_square.
 
 figure
@@ -308,6 +308,21 @@ BER_uni = zeros(size(Eb_No_dB_vector));
 
 %%% WRITE YOUR CODE HERE
 
+x_bits = randi([0, 1], [1, N_bits]);
+
+for i = 1 : length(Eb_No_dB_vector)
+  x_square = GenerateSquarePulses(t_axis, T_sq, Energy_per_bit, fs, x_bits, 'unipolar'); 
+  y_square = AWGNChannel(x_square, i, fs);
+  [rec_bits, ht, z_square, samples] = MatchedFilter(T_sq, Energy_per_bit, fs, y_square, 'unipolar'); 
+  
+  BER_uni(i) = sum(bitxor(x_bits, samples(1: N_bits))) / N_bits;
+  
+  x_square = GenerateSquarePulses(t_axis, T_sq, Energy_per_bit, fs, x_bits, 'bipolar'); 
+  y_square = AWGNChannel(x_square, i, fs);
+  [rec_bits, ht, z_square, samples] = MatchedFilter(T_sq, Energy_per_bit, fs, y_square, 'bipolar'); 
+  
+  BER_bi(i) = sum(bitxor(x_bits, samples(1: N_bits))) / N_bits;
+end
 %%%
 
 figure
